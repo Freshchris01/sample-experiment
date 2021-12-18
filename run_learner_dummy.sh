@@ -1,1 +1,1 @@
-nohup python ./learner_dummy.py  &
+nohup python learner_dummy.py  &
