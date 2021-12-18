@@ -1,1 +1,1 @@
-nohup python ./run_actor_dummy.py  &
+nohup python ./actor_dummy.py  &
