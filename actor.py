@@ -82,6 +82,11 @@ parser.add_argument(
     type=float,
     default=9999,
     help="Stop once the specified reward is reached.")
+parser.add_argument(
+	"--no-graphics",
+	type=bool,
+	default=True,
+	help="Run environment with or without graphics.")
 
 if __name__ == "__main__":
     args = parser.parse_args()
@@ -95,7 +100,12 @@ if __name__ == "__main__":
 
     # Start and reset the actual Unity3DEnv (either already running Unity3D
     # editor or a binary (game) to be started automatically).
-    env = Unity3DEnv(file_name=args.game, episode_horizon=args.horizon)
+    env = Unity3DEnv(
+		file_name=args.game,
+		episode_horizon=args.horizon,
+		no_graphics=args.no_graphics
+	)
+
     obs = env.reset()
     eid = client.start_episode(training_enabled=not args.no_train)
 

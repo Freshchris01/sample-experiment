@@ -1,32 +1,3 @@
-"""
-Example of running a Unity3D (MLAgents) Policy server that can learn
-Policies via sampling inside many connected Unity game clients (possibly
-running in the cloud on n nodes).
-For a locally running Unity3D example, see:
-`examples/unity3d_env_local.py`
-
-To run this script against one or more possibly cloud-based clients:
-1) Install Unity3D and `pip install mlagents`.
-
-2) Compile a Unity3D example game with MLAgents support (e.g. 3DBall or any
-   other one that you created yourself) and place the compiled binary
-   somewhere, where your RLlib client script (see below) can access it.
-
-2.1) To find Unity3D MLAgent examples, first `pip install mlagents`,
-     then check out the `.../ml-agents/Project/Assets/ML-Agents/Examples/`
-     folder.
-
-3) Change this RLlib Policy server code so it knows the observation- and
-   action Spaces, the different Policies (called "behaviors" in Unity3D
-   MLAgents), and Agent-to-Policy mappings for your particular game.
-   Alternatively, use one of the two already existing setups (3DBall or
-   SoccerStrikersVsGoalie).
-
-4) Then run (two separate shells/machines):
-$ python unity3d_server.py --env 3DBall
-$ python unity3d_client.py --inference-mode=local --game [path to game binary]
-"""
-
 import argparse
 import os
 from gym.spaces.box import Box
@@ -35,12 +6,12 @@ from gym.spaces.multi_discrete import MultiDiscrete
 import ray
 from ray.rllib.agents.registry import get_trainer_class
 from ray.rllib.env.policy_server_input import PolicyServerInput
-from ray.rllib.env.wrappers.unity3d_env import Unity3DEnv
 from ray.rllib.policy.policy import PolicySpec
 
 SERVER_ADDRESS = "localhost"
 SERVER_PORT = 9900
 CHECKPOINT_FILE = "last_checkpoint_{}.out"
+BEHAVIOUR_NAME= "TouchCubeVector"
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -59,15 +30,6 @@ parser.add_argument(
     default=2,
     help="The number of workers to use. Each worker will create "
     "its own listening socket for incoming experiences.")
-parser.add_argument(
-    "--env",
-    type=str,
-    default="TouchCubeVector",
-    choices=[
-		"TouchCubeVector"
-    ],
-    help="The name of the Env to run in the Unity3D editor "
-    "(feel free to add more to this script!)")
 parser.add_argument(
     "--port",
     type=int,
@@ -104,13 +66,13 @@ if __name__ == "__main__":
             return None
 
     policies = {
-        "TouchCube": PolicySpec(
+        "TouchCubeVector": PolicySpec(
             observation_space=Box(float("-inf"), float("inf"), (9, )),
             action_space=MultiDiscrete([3, 3, 3, 3, 3, 3, 3]))
     }
 
     def policy_mapping_fn_def(agent_id, episode, worker, **kwargs):
-        return "TouchCube"
+        return "TouchCubeVector"
     policy_mapping_fn = policy_mapping_fn_def
 
     # The entire config will be sent to connecting clients so they can
