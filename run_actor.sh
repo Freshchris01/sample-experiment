@@ -1,4 +1,4 @@
-nohup python unity3d_client.py \
+nohup python actor.py \
 	--inference-mode=local \
 	--env TouchCubeVector \
 	--server 192.168.3.213 \
