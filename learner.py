@@ -8,7 +8,7 @@ from ray.rllib.agents.registry import get_trainer_class
 from ray.rllib.env.policy_server_input import PolicyServerInput
 from ray.rllib.policy.policy import PolicySpec
 
-SERVER_ADDRESS = "localhost"
+SERVER_ADDRESS = "0.0.0.0"
 SERVER_PORT = 9900
 CHECKPOINT_FILE = "last_checkpoint_{}.out"
 BEHAVIOUR_NAME= "TouchCubeVector"
