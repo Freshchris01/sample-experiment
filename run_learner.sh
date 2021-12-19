@@ -1,3 +1,3 @@
 nohup python learner.py \
-	--env TouchCube \
+	--env TouchCubeVector \
 &

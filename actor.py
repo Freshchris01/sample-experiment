@@ -38,7 +38,7 @@ SERVER_PORT = 9900
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
-    "--game",
+    "--env",
     type=str,
     default=None,
     help="The game executable to run as RL env. If not provided, uses local "
@@ -100,8 +100,10 @@ if __name__ == "__main__":
 
     # Start and reset the actual Unity3DEnv (either already running Unity3D
     # editor or a binary (game) to be started automatically).
+
+    env_path = f"~/env/{args.env}/build.x86_64"
     env = Unity3DEnv(
-		file_name=args.game,
+		file_name=env_path,
 		episode_horizon=args.horizon,
 		no_graphics=args.no_graphics
 	)
