@@ -101,7 +101,7 @@ if __name__ == "__main__":
     # Start and reset the actual Unity3DEnv (either already running Unity3D
     # editor or a binary (game) to be started automatically).
 
-    env_path = f"~/env/{args.env}/build.x86_64"
+    env_path = f"/home/ubuntu/env/{args.env}/build.x86_64"
     env = Unity3DEnv(
 		file_name=env_path,
 		episode_horizon=args.horizon,
