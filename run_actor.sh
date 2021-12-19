@@ -1,3 +1,5 @@
+#!/usr/bin/env
+
 nohup python actor.py \
 	--inference-mode=local \
 	--env TouchCubeVector \
