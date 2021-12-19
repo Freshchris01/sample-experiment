@@ -102,7 +102,7 @@ if __name__ == "__main__":
     # editor or a binary (game) to be started automatically).
 
     #env_path = f"/home/ubuntu/env/{args.env}/build.x86_64"
-    env_path= f"/home/ubuntu/env/robot_arm/single/server/TouchCubeVector/build.x86_64"
+    env_path= f"/home/ubuntu/env/TouchCubeVector/build.x86_64"
     env = Unity3DEnv(
 		file_name=env_path,
 		episode_horizon=args.horizon,
