@@ -47,6 +47,11 @@ parser.add_argument(
     action="store_true",
     help="Whether to load the Policy "
     "weights from a previous checkpoint")
+parser.add_argument(
+    "--env",
+    type=str,
+    help="Whether to load the Policy ")
+    
 
 if __name__ == "__main__":
     args = parser.parse_args()
